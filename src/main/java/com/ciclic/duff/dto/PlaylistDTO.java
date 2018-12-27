@@ -1,29 +1,22 @@
 package com.ciclic.duff.dto;
 
+import java.util.List;
+
 public class PlaylistDTO
 {
     String name;
-    String artist;
-    String link;
+    List<TrackDTO> tracks;
 
-    PlaylistDTO()
-    {
-
-    }
-
-    PlaylistDTO(String name, String artist, String link)
+    PlaylistDTO(){}
+    PlaylistDTO(String name, List<TrackDTO> tracks)
     {
         this.name = name;
-        this.artist = artist;
-        this.link = link;
+        this.tracks = tracks;
     }
 
     public String getName() {return this.name;}
     public void setName(String name) {this.name = name;}
 
-    public String getArtist() {return this.artist;}
-    public void setArtist(String artist) {this.artist = artist;}
-
-    public String getLink() {return this.link;}
-    public void setLink(String link) {this.link = link;}
+    public List<TrackDTO> getTracks() {return this.tracks;}
+    public void setTracks(List<TrackDTO> tracks) {this.tracks = tracks;}
 }

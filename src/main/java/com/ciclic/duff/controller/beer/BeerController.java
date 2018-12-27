@@ -20,7 +20,7 @@ public class BeerController
     }
 
     /**
-     * Gets a temperature value and returns a beer style with a list of playlists matching it
+     * Gets a temperature value and returns a beer style with a playlist matching it
      * 
      * @param temperature the temperature value to look for a matching beer style
      */
