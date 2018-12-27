@@ -39,14 +39,14 @@
                             <password>${settings.database.admin.passwd}</password>
                             <url>${settings.database.url}</url>
                             <placeholders>
-                                <settings.database.boleia.user>${settings.database.boleia.user}</settings.database.boleia.user>
-                                <settings.database.boleia.passwd>${settings.database.boleia.passwd}</settings.database.boleia.passwd>
-                                <settings.database.boleia.schema>${settings.database.boleia.schema}</settings.database.boleia.schema>
-                                <settings.database.boleia.auditschema>${settings.database.boleia.auditschema}</settings.database.boleia.auditschema>
+                                <settings.database.duff.user>${settings.database.duff.user}</settings.database.duff.user>
+                                <settings.database.duff.passwd>${settings.database.duff.passwd}</settings.database.duff.passwd>
+                                <settings.database.duff.schema>${settings.database.duff.schema}</settings.database.duff.schema>
+                                <settings.database.duff.auditschema>${settings.database.duff.auditschema}</settings.database.duff.auditschema>
                             </placeholders>
                             <schemas>
-                                <schema>${settings.database.boleia.schema}</schema>
-                                <schema>${settings.database.boleia.auditschema}</schema>
+                                <schema>${settings.database.duff.schema}</schema>
+                                <schema>${settings.database.duff.auditschema}</schema>
                             </schemas>
                             <locations>
                                 <location>filesystem:${project.basedir}/migrations</location>

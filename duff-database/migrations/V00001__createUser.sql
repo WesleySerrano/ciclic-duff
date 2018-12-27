@@ -1,9 +1,9 @@
-declare userExists integer;
+declare userexist integer;
 
 begin
-    select count(*) into userExists from dba_users where username = '${settings.database.duff.user}';
-    if(userExists = 0) then
-        execute immediate 'CREATE USER ${seetings.database.duff.user} identified by ${settings.database.duff.passwd';
-        execute immediate 'GRANTE SESSION CREATE TO ${settings.database.duff.user}';
+    select count(*) into userexist from dba_users where username='${settings.database.duff.user}';
+    if (userexist = 0) then
+        execute immediate 'CREATE USER ${settings.database.duff.user} IDENTIFIED BY ${settings.database.duff.passwd}';
+        execute immediate 'GRANT CREATE SESSION TO ${settings.database.duff.user}';
     end if;
 end;
