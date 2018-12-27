@@ -1,43 +1,63 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.ciclic</groupId>
-	<artifactId>duff</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>duff</name>
-	<description>Spring Boot app for choosing beers and music</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                        https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>com.ciclic.duff</groupId>
+    <artifactId>duff-master</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+    
+    <modules>
+        <module>duff-backend</module>
+    </modules>
+    <properties>
+        <main.basedir>${project.basedir}</main.basedir>
+        <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.timestamp>${maven.build.timestamp}</project.build.timestamp>
 
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
+        <!-- BACKEND LIBS VERSIONS -->
+        <versions.libs.spring.boot>1.5.7.RELEASE</versions.libs.spring.boot>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
+        <!-- MAVEN/BUILD LIBS VERSIONS -->
+        <versions.plugins.maven.antrun>1.8</versions.plugins.maven.antrun>
+        <versions.plugins.maven.assembly>2.2-beta-5</versions.plugins.maven.assembly>
+        <versions.plugins.maven.compiler>3.6.1</versions.plugins.maven.compiler>
+        <versions.plugins.maven.resources>3.0.2</versions.plugins.maven.resources>
+    </properties>
+    
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${versions.plugins.maven.resources}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${versions.plugins.maven.antrun}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${versions.plugins.maven.assembly}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${versions.plugins.maven.compiler}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

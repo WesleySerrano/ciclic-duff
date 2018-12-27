@@ -1,0 +1,7 @@
+com/ciclic/duff/boot/DuffApplication.class
+com/ciclic/duff/service/TemperatureBeerService.class
+com/ciclic/duff/dto/TemperatureDTO.class
+com/ciclic/duff/dto/PlaylistDTO.class
+com/ciclic/duff/dto/TrackDTO.class
+com/ciclic/duff/dto/BeerWithMusicDTO.class
+com/ciclic/duff/controller/beer/BeerController.class
