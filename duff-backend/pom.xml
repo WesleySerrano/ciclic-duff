@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ciclic.duff</groupId>
 	<artifactId>duff-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>duff-backend</name>
 	<description>Spring Boot app for choosing beers and music</description>
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ciclic.duff</groupId>
+		<artifactId>duff-master</artifactId>
+		<version>0.0.1</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<groupId>com.ciclic.duff</groupId>
+	<artifactId>duff-database</artifactId>
+	<version>0.0.1</version>
+	<name>duff-database</name>
+	<description>Spring Boot app for choosing beers and music</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${versions.libs.oracle.jdbc}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>${versions.plugins.flyway}</version>
+                <executions>
+                    <execution>
+                        <id>migrate-database</id>
+                        <goals>
+                            <goal>migrate</goal>
+                        </goals>
+                        <configuration>
+                            <user>${settings.database.admin.user}</user>
+                            <password>${settings.database.admin.passwd}</password>
+                            <url>${settings.database.url}</url>
+                            <placeholders>
+                                <settings.database.duff.user>${settings.database.duff.user}</settings.database.duff.user>
+                                <settings.database.duff.passwd>${settings.database.duff.passwd}</settings.database.duff.passwd>
+                                <settings.database.duff.schema>${settings.database.duff.schema}</settings.database.duff.schema>
+                                <settings.database.duff.auditschema>${settings.database.duff.auditschema}</settings.database.duff.auditschema>
+                            </placeholders>
+                            <schemas>
+                                <schema>${settings.database.duff.schema}</schema>
+                                <schema>${settings.database.duff.auditschema}</schema>
+                            </schemas>
+                            <locations>
+                                <location>filesystem:${project.basedir}/migrations</location>
+                            </locations>
+                            <driver>oracle.jdbc.OracleDriver</driver>
+                            <encoding>UTF-8</encoding>
+                            <outOfOrder>${settings.flyway.out.of.order}</outOfOrder>
+                            <skip>${settings.flyway.skip.migrate}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
