@@ -37,7 +37,6 @@
         <settings.database.duff.user>DUFF</settings.database.duff.user>
         <settings.database.duff.passwd>DUFF</settings.database.duff.passwd>
         <settings.database.duff.schema>DUFF_SCHEMA</settings.database.duff.schema>
-        <settings.database.duff.auditschema>DUFF_AUD</settings.database.duff.auditschema>
         <settings.flyway.out.of.order>false</settings.flyway.out.of.order>
         <settings.flyway.skip.migrate>false</settings.flyway.skip.migrate>
     </properties>
