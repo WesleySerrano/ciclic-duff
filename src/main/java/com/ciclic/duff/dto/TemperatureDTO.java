@@ -16,13 +16,8 @@ public class TemperatureDTO
         return this.temperature;
     }
 
-    public void setTemperature(Double temperature)
+    public void setTemperature(double temperature)
     {
         this.temperature = temperature;
-    }
-
-    public void setTemperature(long temperature)
-    {
-        this.temperature = (double)temperature;
     }
 }

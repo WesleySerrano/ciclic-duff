@@ -6,12 +6,12 @@ public class TrackDTO
     String artist;
     String link;
 
-    TrackDTO()
+    public TrackDTO()
     {
 
     }
 
-    TrackDTO(String name, String artist, String link)
+    public TrackDTO(String name, String artist, String link)
     {
         this.name = name;
         this.artist = artist;

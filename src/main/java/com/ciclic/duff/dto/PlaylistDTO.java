@@ -7,8 +7,8 @@ public class PlaylistDTO
     String name;
     List<TrackDTO> tracks;
 
-    PlaylistDTO(){}
-    PlaylistDTO(String name, List<TrackDTO> tracks)
+    public PlaylistDTO(){}
+    public PlaylistDTO(String name, List<TrackDTO> tracks)
     {
         this.name = name;
         this.tracks = tracks;
