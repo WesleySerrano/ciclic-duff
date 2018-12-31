@@ -4,6 +4,7 @@
 bin
 *.jar
 target/*
+*.class
 
 ### STS ###
 .apt_generated

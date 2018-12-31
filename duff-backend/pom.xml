@@ -8,6 +8,7 @@
 		<version>0.0.1</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+	
 	<groupId>com.ciclic.duff</groupId>
 	<artifactId>duff-backend</artifactId>
 	<version>0.0.1</version>
@@ -41,6 +42,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${versions.libs.oracle.jdbc}</version>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -64,6 +71,12 @@
                 </configuration>
             </plugin>
 		</plugins>
+		<resources>
+			<resource>
+			<directory>src/main/resources</directory>
+			<filtering>true</filtering>
+			</resource>
+		</resources> 
 	</build>
 
 </project>

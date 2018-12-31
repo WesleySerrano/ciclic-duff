@@ -5,7 +5,6 @@ public class BeerWithMusicDTO
     String beerStyle;
     PlaylistDTO playlist;
 
-
     public BeerWithMusicDTO(){}
 
     public BeerWithMusicDTO(String beerStyle, PlaylistDTO playlist)

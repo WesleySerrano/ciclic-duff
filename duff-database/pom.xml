@@ -24,7 +24,7 @@
 
     <build>
         <plugins>
-            <plugin>
+            <plugin>            
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>${versions.plugins.flyway}</version>
