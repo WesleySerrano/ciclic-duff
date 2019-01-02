@@ -73,7 +73,7 @@ public class BeerStyleService
 
     public BeerStyle getBeerThatFitsTemperature(double temperature)
     {
-        BeerStyle beerStyle = null;
+        BeerStyle beerStyle = BeerStyle.getNone();
 
         StringBuilder queryString = new StringBuilder(BEER_STYLE_QUERY);
         queryString.append(TABLE_SCHEMA);
@@ -98,6 +98,14 @@ public class BeerStyleService
             {
                 float minTemp = queryResult.getFloat("min_temp");
                 float maxTemp = queryResult.getFloat("max_temp");
+                
+                System.out.println(temperature + " " + maxTemp + " " + minTemp);
+                if(temperature > maxTemp || temperature < minTemp)
+                {
+                    System.out.println(temperature + " - " + maxTemp + " - " + minTemp);
+                    continue;
+                }
+
                 final double TEMPERATURE_AVERAGE = (maxTemp + minTemp)/2.0;
                 final double TEMPERATURE_AVERAGE_DIFFERENCE_WITH_INPUT = Math.abs(TEMPERATURE_AVERAGE - temperature);
                 String style = queryResult.getString("style");
@@ -107,9 +115,8 @@ public class BeerStyleService
                     currentTemperatureAverageDifference = TEMPERATURE_AVERAGE_DIFFERENCE_WITH_INPUT;
                     long styleId = queryResult.getLong("beer_id");
                     String url = queryResult.getString("playlist_url");
-    
-                    beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, url);
 
+                    beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, url);
                 }
                 else if(TEMPERATURE_AVERAGE_DIFFERENCE_WITH_INPUT == currentTemperatureAverageDifference &&
                     StringFunctions.isStringLesserThanOther(style, beerStyle.getStyle())
@@ -120,7 +127,6 @@ public class BeerStyleService
     
                     beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, url);
                 }
-                System.out.println("-> "+beerStyle.getStyle());
             }
 
         } catch (SQLException e) 

@@ -21,6 +21,11 @@ public class BeerStyle
         this.playlistUrl = playlistUrl;
     }
 
+    public static BeerStyle getNone()
+    {
+        return new BeerStyle(0,"",0,0,"");
+    }
+
     /**
      * @return the id
      */
