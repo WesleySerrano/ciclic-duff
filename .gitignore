@@ -6,6 +6,7 @@ bin
 target/*
 *.class
 *.lst
+*pom.properties
 
 ### STS ###
 .apt_generated

@@ -5,3 +5,5 @@ create table ${settings.database.duff.schema}.beer_playlist
 
     constraint fk_beer_playlist foreign key (beer_id) references ${settings.database.duff.schema}.beer(beer_id)
 );
+
+grant select, insert, update, delete on ${settings.database.duff.schema}.beer_playlist to ${settings.database.duff.user};
