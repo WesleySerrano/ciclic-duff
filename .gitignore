@@ -5,6 +5,8 @@ bin
 *.jar
 target/*
 *.class
+*.lst
+*pom.properties
 
 ### STS ###
 .apt_generated
