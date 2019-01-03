@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.ciclic.duff.model.BeerStyle;
 import com.ciclic.duff.util.ApplicationProperties;
@@ -28,6 +30,45 @@ public class BeerStyleDAO
     {
         this.PROPERTIES = new ApplicationProperties();
         this.TABLE_SCHEMA = PROPERTIES.getApplicationPropertyByKey("duff_schema");
+    }
+
+    public List<BeerStyle> getAllBeerStyles()
+    {
+        List<BeerStyle> beerStyles = new ArrayList<BeerStyle>();
+
+        StringBuilder query = new StringBuilder("select beer_id, style, max_temp, min_temp from ");
+        query.append(TABLE_SCHEMA);
+        query.append(".beer b");
+
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        if(connection == null) return null;
+
+        try 
+        {
+            PreparedStatement queryStatement = connection.prepareStatement(query.toString());
+
+            ResultSet queryResult = queryStatement.executeQuery();
+
+            while(queryResult.next())
+            {
+                long styleId = queryResult.getLong("beer_id");
+                String style = queryResult.getString("style");
+                float minTemp = queryResult.getFloat("min_temp");
+                float maxTemp = queryResult.getFloat("max_temp");
+
+                BeerStyle beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, null);
+
+                beerStyles.add(beerStyle);
+            }
+
+            return beerStyles;
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+
+            return null;
+		}
     }
 
     public BeerStyle searchBeerStyleById(long id)

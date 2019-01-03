@@ -1,5 +1,9 @@
 package com.ciclic.duff.dao;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
 import com.ciclic.duff.model.BeerStyle;
 import com.ciclic.duff.util.BeerStyleFunctions;
 
@@ -47,6 +51,14 @@ public class BeerStyleTest
 
 		BeerStyle minNull = beerStyleDAO.getBeerThatFitsTemperature(MIN_TEMP - 1);
 		Assert.assertTrue(BeerStyleFunctions.isNone(minNull));
+	}
+
+	@Test
+	public void grabAllBeers()
+	{
+		List<BeerStyle> beerStyles = beerStyleDAO.getAllBeerStyles();
+
+		assertEquals(beerStyles.size(), 9);
 	}
 }
 

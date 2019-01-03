@@ -28,7 +28,5 @@ public class TemperatureBeerServiceTest
 
         Assert.assertEquals(beerAndPlaylist.getBeerStyle(), "Dunkel");
         Assert.assertTrue(beerAndPlaylist.getPlaylist().getName().toUpperCase().contains("DUNKEL"));
-        /*Assert.assertTrue(playlistTracksContainsTrackName(beerAndPlaylist.getPlaylist().getTracks(), "Lego House"));
-        Assert.assertTrue(playlistTracksContainsTrackName(beerAndPlaylist.getPlaylist().getTracks(), "The Payback"));*/
     }
 }
