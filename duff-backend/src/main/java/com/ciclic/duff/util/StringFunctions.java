@@ -1,6 +1,7 @@
 package com.ciclic.duff.util;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class StringFunctions
 {
@@ -17,5 +18,14 @@ public class StringFunctions
         }
 
         return false;
+    }
+
+    public static boolean validateString(String data)
+    {
+        String regex = "^[a-zA-Z\\s]*$";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        return pattern.matcher(data).matches();
     }
 }

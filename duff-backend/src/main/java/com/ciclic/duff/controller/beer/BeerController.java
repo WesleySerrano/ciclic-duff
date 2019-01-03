@@ -51,4 +51,10 @@ public class BeerController
     {
         return BeerStylesService.getAllBeerStyles();
     }
+
+    @RequestMapping(value="/beer",method=RequestMethod.PUT)
+    public String addNewBeerStyle(@RequestBody BeerStyleDTO newBeerStyle)
+    {
+        return BeerStylesService.addNewBeerStyle(newBeerStyle);
+    }
 }

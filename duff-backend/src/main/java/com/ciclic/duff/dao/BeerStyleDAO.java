@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ciclic.duff.dto.BeerStyleDTO;
 import com.ciclic.duff.model.BeerStyle;
 import com.ciclic.duff.util.ApplicationProperties;
 import com.ciclic.duff.util.StringFunctions;
@@ -175,5 +176,39 @@ public class BeerStyleDAO
 		}
 
         return beerStyle;
+    }
+
+    public String addNewStyle(BeerStyleDTO newStyle)
+    {
+        StringBuilder query = new StringBuilder("insert into ");
+        query.append(TABLE_SCHEMA);
+        query.append(".beer (beer_id, style, max_temp, min_temp) ");
+        query.append("values");
+        query.append("(");
+        query.append(TABLE_SCHEMA);
+        query.append(".BEER_SEQ.nextval, ?, ?, ?");
+
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        if(connection == null) return "Database Connection Error";
+
+        PreparedStatement statement;
+        try 
+        {
+            statement = connection.prepareStatement(query.toString());
+
+            statement.setString(1, newStyle.getStyle());
+            statement.setDouble(2, newStyle.getMaximumTemperature());
+            statement.setDouble(3, newStyle.getMaximumTemperature());
+
+            if(statement.execute()) return "Success";
+            else return "Fail";
+        } 
+        catch (SQLException e) 
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "Fail";
+        }
+
     }
 }

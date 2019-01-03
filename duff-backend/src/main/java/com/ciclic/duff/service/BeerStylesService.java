@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.ciclic.duff.dao.BeerStyleDAO;
 import com.ciclic.duff.dto.BeerStyleDTO;
 import com.ciclic.duff.model.BeerStyle;
+import com.ciclic.duff.util.StringFunctions;
 
 public class BeerStylesService
 {
@@ -28,5 +29,14 @@ public class BeerStylesService
         List<BeerStyle> beerStyles = beerStyleDAO.getAllBeerStyles();
 
         return beerStyles.stream().map(beerStyle -> beerStyle.getStyle()).collect(Collectors.toList());
+    }
+
+    public static String addNewBeerStyle(BeerStyleDTO newBeerStyle)
+    {
+        BeerStyleDAO beerStyleDAO = new BeerStyleDAO();
+
+        if(!StringFunctions.validateString(newBeerStyle.getStyle())) return "Style name not valid";
+
+        return beerStyleDAO.addNewStyle(newBeerStyle);
     }
 }
