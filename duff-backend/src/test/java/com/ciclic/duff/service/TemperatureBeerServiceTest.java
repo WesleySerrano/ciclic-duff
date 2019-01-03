@@ -26,9 +26,9 @@ public class TemperatureBeerServiceTest
 
         BeerWithMusicDTO beerAndPlaylist = TemperatureBeerService.getBeerStyleMatchingTemperature(negativeSevenDegrees);
 
-        Assert.assertEquals(beerAndPlaylist.getBeerStyle(), "IPA");
-        Assert.assertEquals(beerAndPlaylist.getPlaylist().getName(), "IPARTY");
-        Assert.assertTrue(playlistTracksContainsTrackName(beerAndPlaylist.getPlaylist().getTracks(), "Lua de Cristal"));
-        Assert.assertTrue(playlistTracksContainsTrackName(beerAndPlaylist.getPlaylist().getTracks(), "Vogue"));
+        Assert.assertEquals(beerAndPlaylist.getBeerStyle(), "Dunkel");
+        Assert.assertEquals(beerAndPlaylist.getPlaylist().getName(), "Ultimate pub playlist");
+        Assert.assertTrue(playlistTracksContainsTrackName(beerAndPlaylist.getPlaylist().getTracks(), "Lego House"));
+        Assert.assertTrue(playlistTracksContainsTrackName(beerAndPlaylist.getPlaylist().getTracks(), "The Payback"));
     }
 }

@@ -9,7 +9,7 @@ import com.ciclic.duff.model.BeerStyle;
 import com.ciclic.duff.util.ApplicationProperties;
 import com.ciclic.duff.util.StringFunctions;
 
-public class BeerStyleService
+public class BeerStyleDAO
 {
     /**
      * select b.beer_id, b.style, b.min_temp, b.max_temp, bp.playlist_url
@@ -19,12 +19,12 @@ public class BeerStyleService
      * on b.beer_id = bp.beer_id
      * where b.beer_id = ${id}
      */
-    private final String BEER_STYLE_QUERY = "select b.beer_id, b.style, b.min_temp, b.max_temp, bp.playlist_url from ";
+    private final String BEER_STYLE_QUERY = "select b.beer_id, b.style, b.min_temp, b.max_temp, bp.playlist_id from ";
 
     private ApplicationProperties PROPERTIES;
     final String TABLE_SCHEMA;
 
-    public BeerStyleService()
+    public BeerStyleDAO()
     {
         this.PROPERTIES = new ApplicationProperties();
         this.TABLE_SCHEMA = PROPERTIES.getApplicationPropertyByKey("duff_schema");
@@ -58,9 +58,9 @@ public class BeerStyleService
                 String style = queryResult.getString("style");
                 float minTemp = queryResult.getFloat("min_temp");
                 float maxTemp = queryResult.getFloat("max_temp");
-                String url = queryResult.getString("playlist_url");
+                String playlistId = queryResult.getString("playlist_id");
 
-                beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, url);
+                beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, playlistId);
             }
         } 
         catch (SQLException e) 
@@ -99,10 +99,8 @@ public class BeerStyleService
                 float minTemp = queryResult.getFloat("min_temp");
                 float maxTemp = queryResult.getFloat("max_temp");
                 
-                System.out.println(temperature + " " + maxTemp + " " + minTemp);
                 if(temperature > maxTemp || temperature < minTemp)
                 {
-                    System.out.println(temperature + " - " + maxTemp + " - " + minTemp);
                     continue;
                 }
 
@@ -114,18 +112,18 @@ public class BeerStyleService
                 {
                     currentTemperatureAverageDifference = TEMPERATURE_AVERAGE_DIFFERENCE_WITH_INPUT;
                     long styleId = queryResult.getLong("beer_id");
-                    String url = queryResult.getString("playlist_url");
+                    String playlistId = queryResult.getString("playlist_id");
 
-                    beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, url);
+                    beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, playlistId);
                 }
                 else if(TEMPERATURE_AVERAGE_DIFFERENCE_WITH_INPUT == currentTemperatureAverageDifference &&
                     StringFunctions.isStringLesserThanOther(style, beerStyle.getStyle())
                 )
                 {
                     long styleId = queryResult.getLong("beer_id");
-                    String url = queryResult.getString("playlist_url");
+                    String playlistId = queryResult.getString("playlist_id");
     
-                    beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, url);
+                    beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, playlistId);
                 }
             }
 

@@ -29,6 +29,7 @@
         <versions.plugins.maven.compiler>3.6.1</versions.plugins.maven.compiler>
         <versions.plugins.maven.resources>3.0.2</versions.plugins.maven.resources>
         <versions.libs.oracle.jdbc>11.2.0</versions.libs.oracle.jdbc>
+        <versions.libs.spotify>2.1.2</versions.libs.spotify>
 
         <!-- DATABASE -->
         <settings.database.admin.user>SYS as SYSDBA</settings.database.admin.user>
@@ -39,6 +40,12 @@
         <settings.database.duff.schema>DUFF_SCHEMA</settings.database.duff.schema>
         <settings.flyway.out.of.order>false</settings.flyway.out.of.order>
         <settings.flyway.skip.migrate>false</settings.flyway.skip.migrate>
+
+        <!-- SPOTIFY -->
+        <settings.spotify.client_id>fce3333441a04d919b904734630fac88</settings.spotify.client_id>
+        <settings.spotify.access_token>BQDSc5zTKV-BhEUO5vgb1h_XOEtRcMRGh29FNxQqf-PFmilRAz-pgyFnK5UXb4A-CPpAKCyfzWkAluGqQyWKJrOyDBd37foOC3hY2u-gvCjX9vGvxpXJlw_I-dVICiXIUGlQN9lsUF_0bnhHHa5YRBwHYiXkw3Lg0uXdjhVWQKSmDlY-NiTi</settings.spotify.access_token>
+        <settings.spotify.refresh_token>AQCAkhYmRcRg_qoNBEDXWJbVeG3Nsm-jp1AKECO-4e_6dOP0fvYM6ZYqtdiq6rRr8m5onDEPM9rjNLzeue3QlkTSD7705sGe0jjjXebZYY5x8OBu8FkN-lZ6GBPhAUPW4-UrWQ</settings.spotify.refresh_token>
+
     </properties>
 
     <build>

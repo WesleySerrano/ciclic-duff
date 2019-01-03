@@ -3,10 +3,13 @@ package com.ciclic.duff.service;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.ciclic.duff.dao.BeerStyleDAO;
 import com.ciclic.duff.dto.BeerWithMusicDTO;
 import com.ciclic.duff.dto.PlaylistDTO;
 import com.ciclic.duff.dto.TemperatureDTO;
 import com.ciclic.duff.dto.TrackDTO;
+import com.ciclic.duff.model.BeerStyle;
+import com.wrapper.spotify.SpotifyApi;
 
 public class TemperatureBeerService
 {
@@ -18,16 +21,15 @@ public class TemperatureBeerService
      */
     public static BeerWithMusicDTO getBeerStyleMatchingTemperature(TemperatureDTO temperature)
     {
-        TrackDTO track0 = new TrackDTO("Lua de Cristal", "Xuxa", "https: //open.spotify.com/artist/21451j1KhjAiaYKflxBjr1");
-        TrackDTO track1 = new TrackDTO("Vogue", "Madonna", "https: //open.spotify.com/artist/21451j1Khj123YKflxBjr1");
+        BeerStyleDAO beerStyleDAO = new BeerStyleDAO();
+        
+        BeerStyle beerStyle = beerStyleDAO.getBeerThatFitsTemperature(temperature.getTemperature());
 
-        List<TrackDTO> tracksList = new ArrayList<TrackDTO>();
-        tracksList.add(track0);
-        tracksList.add(track1);
+        SpotifyService spotifyService = new SpotifyService();        
 
-        PlaylistDTO playlist = new PlaylistDTO("IPARTY",tracksList);
+        PlaylistDTO playlist = spotifyService.getPlaylist(beerStyle.getPlaylistId());
 
-        BeerWithMusicDTO beerWithMusic = new BeerWithMusicDTO("IPA",playlist);
+        BeerWithMusicDTO beerWithMusic = playlist == null? null : new BeerWithMusicDTO(beerStyle.getStyle(),playlist);
 
         return beerWithMusic;
     }

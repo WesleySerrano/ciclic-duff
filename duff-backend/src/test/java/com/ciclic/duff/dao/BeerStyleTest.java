@@ -12,13 +12,13 @@ import org.junit.Assert;
 @SpringBootTest
 public class BeerStyleTest 
 {
-	BeerStyleService beerStyleService = new BeerStyleService();
+	BeerStyleDAO beerStyleDAO = new BeerStyleDAO();
 	final double TEMPERATURE_TOLERANCE = 0.01;
 
 	@Test
 	public void grabTheFirstBeer() 
 	{		
-		BeerStyle beerStyle = beerStyleService.searchBeerStyleById(1);
+		BeerStyle beerStyle = beerStyleDAO.searchBeerStyleById(1);
 
 		Assert.assertEquals(beerStyle.getId(),1);
 		Assert.assertEquals(beerStyle.getStyle(), "Weissbier");
@@ -32,20 +32,20 @@ public class BeerStyleTest
 		final double MAX_TEMP = 14;
 		final double MIN_TEMP = -10;
 
-		BeerStyle beerStyle0 = beerStyleService.getBeerThatFitsTemperature(-7);
+		BeerStyle beerStyle0 = beerStyleDAO.getBeerThatFitsTemperature(-7);
 		Assert.assertEquals(beerStyle0.getStyle(), "Dunkel");
 		Assert.assertEquals(beerStyle0.getMaximumTemperature(), 2, TEMPERATURE_TOLERANCE);
 		Assert.assertEquals(beerStyle0.getMinimumTemperature(), -8, TEMPERATURE_TOLERANCE);
 
-		BeerStyle beerStyle1 = beerStyleService.getBeerThatFitsTemperature(1);
+		BeerStyle beerStyle1 = beerStyleDAO.getBeerThatFitsTemperature(1);
 		Assert.assertEquals(beerStyle1.getStyle(), "Pilsens");
 		Assert.assertEquals(beerStyle1.getMaximumTemperature(), 4, TEMPERATURE_TOLERANCE);
 		Assert.assertEquals(beerStyle1.getMinimumTemperature(), -2, TEMPERATURE_TOLERANCE);
 
-		BeerStyle maxNull = beerStyleService.getBeerThatFitsTemperature(MAX_TEMP + 1);
+		BeerStyle maxNull = beerStyleDAO.getBeerThatFitsTemperature(MAX_TEMP + 1);
 		Assert.assertTrue(BeerStyleFunctions.isNone(maxNull));
 
-		BeerStyle minNull = beerStyleService.getBeerThatFitsTemperature(MIN_TEMP - 1);
+		BeerStyle minNull = beerStyleDAO.getBeerThatFitsTemperature(MIN_TEMP - 1);
 		Assert.assertTrue(BeerStyleFunctions.isNone(minNull));
 	}
 }

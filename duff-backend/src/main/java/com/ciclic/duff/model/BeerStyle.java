@@ -6,19 +6,19 @@ public class BeerStyle
     private String style;
     private double maximumTemperature;
     private double minimumTemperature;
-    private String playlistUrl;
+    private String playlistId;
 
     public BeerStyle()
     {
 
     }
 
-    public BeerStyle(long id, String style, double maximumTemperature, double minimumTemperature, String playlistUrl)
+    public BeerStyle(long id, String style, double maximumTemperature, double minimumTemperature, String playlistId)
     {
         this.id = id;
         this.style = style;
         this.maximumTemperature = maximumTemperature; this.minimumTemperature = minimumTemperature;
-        this.playlistUrl = playlistUrl;
+        this.playlistId = playlistId;
     }
 
     public static BeerStyle getNone()
@@ -83,17 +83,17 @@ public class BeerStyle
     }
 
     /**
-     * @return the playlistUrl
+     * @return the playlistId
      */
-    public String getPlaylistUrl() {
-        return playlistUrl;
+    public String getPlaylistId() {
+        return playlistId;
     }
 
     /**
-     * @param playlistUrl the playlistUrl to set
+     * @param playlistId the playlistId to set
      */
-    public void setPlaylistUrl(String playlistUrl) {
-        this.playlistUrl = playlistUrl;
+    public void setPlaylistId(String playlistId) {
+        this.playlistId = playlistId;
     }
 
 }
