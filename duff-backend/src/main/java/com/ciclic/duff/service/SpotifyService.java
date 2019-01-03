@@ -12,10 +12,12 @@ import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.model_objects.specification.Playlist;
+import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
 import com.wrapper.spotify.model_objects.specification.PlaylistTrack;
 import com.wrapper.spotify.model_objects.specification.Track;
 import com.wrapper.spotify.requests.data.playlists.GetPlaylistRequest;
 import com.wrapper.spotify.requests.data.playlists.GetPlaylistsTracksRequest;
+import com.wrapper.spotify.requests.data.search.simplified.SearchPlaylistsRequest;
 
 public class SpotifyService
 {
@@ -52,8 +54,7 @@ public class SpotifyService
             List<TrackDTO> tracksDTOs = new ArrayList<TrackDTO>();
 
             final Playlist playlist = playlistRequest.execute();
-            playlistDTO.setName(playlist.getName());
-            System.out.println("Name: " + playlist.getName());
+            playlistDTO.setName(playlist.getName());            
             Paging<PlaylistTrack> playlistTracks = playlist.getTracks();
             
             for(PlaylistTrack playlistTrack : playlistTracks.getItems())
@@ -66,6 +67,27 @@ public class SpotifyService
             playlistDTO.setTracks(tracksDTOs);
 
             return playlistDTO;
+        } 
+        catch (IOException | SpotifyWebApiException e) 
+        {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public PlaylistDTO getPlaylistByName(String playlistKeyword)
+    {
+        SearchPlaylistsRequest searchPlaylistsRequest = spotifyApi.searchPlaylists(playlistKeyword)
+        .market(CountryCode.SE)
+        .limit(10)
+        .offset(0).build();
+
+        try 
+        {
+            final Paging<PlaylistSimplified> playlistSimplifiedPaging = searchPlaylistsRequest.execute();
+            if(playlistSimplifiedPaging.getTotal() == 0) return null;
+            String playlistId = playlistSimplifiedPaging.getItems()[0].getId();
+            return this.getPlaylist(playlistId);
         } 
         catch (IOException | SpotifyWebApiException e) 
         {

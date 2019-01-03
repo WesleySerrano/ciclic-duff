@@ -2,7 +2,7 @@ package com.ciclic.duff.dto;
 
 public class BeerWithMusicDTO
 {
-    String beerStyle;
+    String beerStyle;    
     PlaylistDTO playlist;
 
     public BeerWithMusicDTO(){}

@@ -11,6 +11,5 @@ public class DuffApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DuffApplication.class, args);
 	}
-
 }
 

@@ -27,7 +27,7 @@ public class TemperatureBeerService
 
         SpotifyService spotifyService = new SpotifyService();        
 
-        PlaylistDTO playlist = spotifyService.getPlaylist(beerStyle.getPlaylistId());
+        PlaylistDTO playlist = spotifyService.getPlaylistByName(beerStyle.getStyle());
 
         BeerWithMusicDTO beerWithMusic = playlist == null? null : new BeerWithMusicDTO(beerStyle.getStyle(),playlist);
 

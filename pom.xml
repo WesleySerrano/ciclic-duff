@@ -43,7 +43,7 @@
 
         <!-- SPOTIFY -->
         <settings.spotify.client_id>fce3333441a04d919b904734630fac88</settings.spotify.client_id>
-        <settings.spotify.access_token>BQDSc5zTKV-BhEUO5vgb1h_XOEtRcMRGh29FNxQqf-PFmilRAz-pgyFnK5UXb4A-CPpAKCyfzWkAluGqQyWKJrOyDBd37foOC3hY2u-gvCjX9vGvxpXJlw_I-dVICiXIUGlQN9lsUF_0bnhHHa5YRBwHYiXkw3Lg0uXdjhVWQKSmDlY-NiTi</settings.spotify.access_token>
+        <settings.spotify.access_token>    BQDcvKCjgfuE5-prWyvNQ8rQ2_OfuOfrvJ9Pj1-DzB2h7gJAtBjE9QIJg-IFo3NRhnv2GgnWzsHHWWnB0MWSvrHrZLT_ADtWTuYNDHWn_E342a-LVWD4pw4dg-rbGL4-BUwY2u_u0IDyp61qrIr8nqGx6AZKPb1cADtC8g6Ig2GrmWMWcour</settings.spotify.access_token>
         <settings.spotify.refresh_token>AQCAkhYmRcRg_qoNBEDXWJbVeG3Nsm-jp1AKECO-4e_6dOP0fvYM6ZYqtdiq6rRr8m5onDEPM9rjNLzeue3QlkTSD7705sGe0jjjXebZYY5x8OBu8FkN-lZ6GBPhAUPW4-UrWQ</settings.spotify.refresh_token>
 
     </properties>

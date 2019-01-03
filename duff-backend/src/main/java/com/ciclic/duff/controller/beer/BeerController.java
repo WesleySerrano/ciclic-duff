@@ -1,9 +1,14 @@
 package com.ciclic.duff.controller.beer;
 
+import java.util.List;
+
 import com.ciclic.duff.dto.BeerWithMusicDTO;
 import com.ciclic.duff.dto.TemperatureDTO;
 import com.ciclic.duff.service.TemperatureBeerService;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +34,17 @@ public class BeerController
     @RequestMapping(value="/beerAndMusic",method=RequestMethod.POST)
     public BeerWithMusicDTO getBeerAndMatchingPlaylist(@RequestBody TemperatureDTO temperature)
     {
-        return TemperatureBeerService.getBeerStyleMatchingTemperature(temperature);
+        BeerWithMusicDTO beerWithMusicDTO = TemperatureBeerService.getBeerStyleMatchingTemperature(temperature);
+        return beerWithMusicDTO;
     }
+
+    /**
+     * Gets all the beer styles with its playlists
+     * @return a list containing all beer styles, its temperatures and its playlists
+     */
+    /*@RequestMapping(value="/beer",method=RequestMethod.GET)
+    public List<BeerWithMusicDTO> getAllBeerStylesAndItsPlaylists()
+    {
+
+    }*/
 }
