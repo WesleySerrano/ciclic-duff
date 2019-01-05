@@ -205,7 +205,6 @@ public class BeerStyleDAO
         } 
         catch (SQLException e) 
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return "Fail";
         }
