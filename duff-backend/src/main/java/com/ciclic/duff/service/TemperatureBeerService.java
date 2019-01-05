@@ -29,7 +29,7 @@ public class TemperatureBeerService
 
         PlaylistDTO playlist = spotifyService.getPlaylistByName(beerStyle.getStyle());
 
-        BeerWithMusicDTO beerWithMusic = playlist == null? null : new BeerWithMusicDTO(beerStyle.getStyle(),playlist);
+        BeerWithMusicDTO beerWithMusic = (playlist == null)? null : new BeerWithMusicDTO(beerStyle.getStyle(),playlist);
 
         return beerWithMusic;
     }
