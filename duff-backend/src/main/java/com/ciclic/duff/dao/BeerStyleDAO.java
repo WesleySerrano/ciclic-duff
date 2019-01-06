@@ -22,7 +22,7 @@ public class BeerStyleDAO
      * on b.beer_id = bp.beer_id
      * where b.beer_id = ${id}
      */
-    private final String BEER_STYLE_QUERY = "select b.beer_id, b.style, b.min_temp, b.max_temp, bp.playlist_id from ";
+    private final String BEER_STYLE_QUERY = "select b.beer_id, b.style, b.min_temp, b.max_temp from ";
 
     private ApplicationProperties PROPERTIES;
     final String TABLE_SCHEMA;
@@ -39,7 +39,7 @@ public class BeerStyleDAO
 
         StringBuilder query = new StringBuilder("select beer_id, style, max_temp, min_temp from ");
         query.append(TABLE_SCHEMA);
-        query.append(".beer b");
+        query.append(".beer b where b.excluded = 0");
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
         if(connection == null) return null;
@@ -57,7 +57,7 @@ public class BeerStyleDAO
                 float minTemp = queryResult.getFloat("min_temp");
                 float maxTemp = queryResult.getFloat("max_temp");
 
-                BeerStyle beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, null);
+                BeerStyle beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp);
 
                 beerStyles.add(beerStyle);
             }
@@ -80,10 +80,7 @@ public class BeerStyleDAO
 
         queryString.append(TABLE_SCHEMA);
         queryString.append(".");
-        queryString.append("beer b left join ");
-        queryString.append(TABLE_SCHEMA);
-        queryString.append(".");
-        queryString.append("beer_playlist bp on b.beer_id = bp.beer_id where b.beer_id = ?");
+        queryString.append("beer b where b.excluded = 0 and b.beer_id = ?");
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
         if(connection == null) return null;
@@ -100,9 +97,8 @@ public class BeerStyleDAO
                 String style = queryResult.getString("style");
                 float minTemp = queryResult.getFloat("min_temp");
                 float maxTemp = queryResult.getFloat("max_temp");
-                String playlistId = queryResult.getString("playlist_id");
 
-                beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, playlistId);
+                beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp);
             }
         } 
         catch (SQLException e) 
@@ -120,10 +116,7 @@ public class BeerStyleDAO
         StringBuilder queryString = new StringBuilder(BEER_STYLE_QUERY);
         queryString.append(TABLE_SCHEMA);
         queryString.append(".");
-        queryString.append("beer b left join ");
-        queryString.append(TABLE_SCHEMA);
-        queryString.append(".");
-        queryString.append("beer_playlist bp on b.beer_id = bp.beer_id");
+        queryString.append("beer b where b.excluded = 0");
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
         if(connection == null) return null;
@@ -154,18 +147,16 @@ public class BeerStyleDAO
                 {
                     currentTemperatureAverageDifference = TEMPERATURE_AVERAGE_DIFFERENCE_WITH_INPUT;
                     long styleId = queryResult.getLong("beer_id");
-                    String playlistId = queryResult.getString("playlist_id");
 
-                    beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, playlistId);
+                    beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp);
                 }
                 else if(TEMPERATURE_AVERAGE_DIFFERENCE_WITH_INPUT == currentTemperatureAverageDifference &&
                     StringFunctions.isStringLesserThanOther(style, beerStyle.getStyle())
                 )
                 {
                     long styleId = queryResult.getLong("beer_id");
-                    String playlistId = queryResult.getString("playlist_id");
     
-                    beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp, playlistId);
+                    beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp);
                 }
             }
 
@@ -198,7 +189,7 @@ public class BeerStyleDAO
 
             statement.setString(1, newStyle.getStyle());
             statement.setDouble(2, newStyle.getMaximumTemperature());
-            statement.setDouble(3, newStyle.getMaximumTemperature());
+            statement.setDouble(3, newStyle.getMinimumTemperature());
 
             statement.execute();
             return "Success";
@@ -207,6 +198,34 @@ public class BeerStyleDAO
         {
             e.printStackTrace();
             return "Fail, SQL Exception";
+        }
+
+    }
+
+    public String deleteBeerStyle(String beerStyleToDeleteName)
+    {
+        StringBuilder deleteString = new StringBuilder("update ");
+        deleteString.append(TABLE_SCHEMA);
+        deleteString.append(".beer b set excluded = 1 where b.style = ?");
+
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        if(connection == null) return "Database Connection Error";
+
+        PreparedStatement statement;
+
+        try 
+        {
+            statement = connection.prepareStatement(deleteString.toString());
+            statement.setString(1, beerStyleToDeleteName);
+
+            statement.execute();
+
+            return "Success";
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            return "SQLException";
         }
 
     }

@@ -56,4 +56,10 @@ public class BeerController
     {
         return BeerStylesService.addNewBeerStyle(newBeerStyle);
     }
+
+    @RequestMapping(value="/beer",method=RequestMethod.DELETE)
+    public String deleteBeerStyle(@RequestBody BeerStyleDTO beerStyleToDelete)
+    {   
+        return BeerStylesService.deleteBeerStyle(beerStyleToDelete);
+    }   
 } 

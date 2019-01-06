@@ -41,4 +41,17 @@ public class BeerStylesService
 
         return beerStyleDAO.addNewStyle(newBeerStyle);
     }
+
+    public static String deleteBeerStyle(BeerStyleDTO beerStyleToDelete)
+    {
+        if(StringFunctions.validateString(beerStyleToDelete.getStyle()))
+        {        
+            BeerStyleDAO beerStyleDAO = new BeerStyleDAO();
+            return beerStyleDAO.deleteBeerStyle(beerStyleToDelete.getStyle());
+        }
+        else
+        {
+            return "Beer style name not valid";
+        }
+    }
 }
