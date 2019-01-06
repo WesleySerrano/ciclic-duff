@@ -33,6 +33,8 @@ public class BeerStylesService
 
     public static String addNewBeerStyle(BeerStyleDTO newBeerStyle)
     {
+        if(newBeerStyle.getMaximumTemperature() < newBeerStyle.getMinimumTemperature()) return "Maximum temperature lesser than minimum temperature";
+
         BeerStyleDAO beerStyleDAO = new BeerStyleDAO();
 
         if(!StringFunctions.validateString(newBeerStyle.getStyle())) return "Style name not valid";

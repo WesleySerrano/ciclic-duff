@@ -1,6 +1,7 @@
 package com.ciclic.duff.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class BeerStyleTest
 	{
 		List<BeerStyle> beerStyles = beerStyleDAO.getAllBeerStyles();
 
-		assertEquals(beerStyles.size(), 9);
+		assertTrue(beerStyles.size() >= 9);
 	}
 }
 

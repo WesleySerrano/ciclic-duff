@@ -16,7 +16,7 @@ public class BeerStylesServiceTest
     {
         List<String> beerStylesNames = BeerStylesService.getAllBeerStylesNames();
 
-        Assert.assertEquals(beerStylesNames.size(), 9);
+        Assert.assertTrue(beerStylesNames.size() >= 9);
         Assert.assertTrue(StringFunctions.listContainsString(beerStylesNames, "Weizenbier"));
         Assert.assertTrue(StringFunctions.listContainsString(beerStylesNames, "Pilsens"));
         Assert.assertTrue(StringFunctions.listContainsString(beerStylesNames, "Dunkel"));

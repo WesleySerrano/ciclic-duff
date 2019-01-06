@@ -186,7 +186,7 @@ public class BeerStyleDAO
         query.append("values");
         query.append("(");
         query.append(TABLE_SCHEMA);
-        query.append(".BEER_SEQ.nextval, ?, ?, ?");
+        query.append(".BEER_SEQ.nextval, ?, ?, ?)");
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
         if(connection == null) return "Database Connection Error";
@@ -200,13 +200,13 @@ public class BeerStyleDAO
             statement.setDouble(2, newStyle.getMaximumTemperature());
             statement.setDouble(3, newStyle.getMaximumTemperature());
 
-            if(statement.execute()) return "Success";
-            else return "Fail";
+            statement.execute();
+            return "Success";
         } 
         catch (SQLException e) 
         {
             e.printStackTrace();
-            return "Fail";
+            return "Fail, SQL Exception";
         }
 
     }

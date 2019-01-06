@@ -46,7 +46,6 @@ public class BeerController
      * @return a list containing all beer styles, its temperatures and its playlists
      */
     @RequestMapping(value="/beer",method=RequestMethod.GET)
-    @ResponseBody
     public List<BeerStyleDTO> getAllBeerStylesAndItsPlaylists()
     {
         return BeerStylesService.getAllBeerStyles();
