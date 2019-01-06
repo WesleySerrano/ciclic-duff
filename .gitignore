@@ -3,7 +3,7 @@
 .vscode
 bin
 *.jar
-target/*
+duff-backend/target/*
 *.class
 *.lst
 *pom.properties
