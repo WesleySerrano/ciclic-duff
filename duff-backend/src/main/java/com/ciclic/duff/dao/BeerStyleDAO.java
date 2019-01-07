@@ -160,11 +160,51 @@ public class BeerStyleDAO
                 }
             }
 
-        } catch (SQLException e) 
+        } 
+        catch (SQLException e) 
         {
             e.printStackTrace();
             return null;
 		}
+
+        return beerStyle;
+    }
+
+    public BeerStyle getBeerStyleByName(String beerStyleName)
+    {
+        BeerStyle beerStyle = BeerStyle.getNone();
+
+        StringBuilder queryString = new StringBuilder(BEER_STYLE_QUERY);
+        queryString.append(TABLE_SCHEMA);
+        queryString.append(".");
+        queryString.append("beer b where b.excluded = 0 and b.style = ?");
+
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        if(connection == null) return beerStyle;
+
+        PreparedStatement queryStatement;
+
+        try 
+        {
+            queryStatement = connection.prepareStatement(queryString.toString());
+            queryStatement.setString(1, beerStyleName);
+
+            ResultSet queryResult = queryStatement.executeQuery();
+
+            if(queryResult.next())
+            {
+                long styleId = queryResult.getLong("beer_id");
+                String style = queryResult.getString("style");
+                float minTemp = queryResult.getFloat("min_temp");
+                float maxTemp = queryResult.getFloat("max_temp");
+
+                beerStyle = new BeerStyle(styleId, style, maxTemp, minTemp);
+            }
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
 
         return beerStyle;
     }
@@ -228,5 +268,35 @@ public class BeerStyleDAO
             return "SQLException";
         }
 
+    }
+
+    public String updateBeerStyle(BeerStyleDTO beerStyleToUpdate)
+    {
+        StringBuilder updateString = new StringBuilder("update ");
+        updateString.append(TABLE_SCHEMA);
+        updateString.append(".beer b set max_temp = ?, min_temp = ? where style = ?");
+
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        if(connection == null) return "Database Connection Error";
+
+        PreparedStatement updateStatement;
+
+        try 
+        {
+            updateStatement = connection.prepareStatement(updateString.toString());
+
+            updateStatement.setDouble(1, beerStyleToUpdate.getMaximumTemperature());
+            updateStatement.setDouble(2, beerStyleToUpdate.getMinimumTemperature());
+            updateStatement.setString(3, beerStyleToUpdate.getStyle());
+
+            updateStatement.execute();
+
+            return "Success";
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            return "SQLException";
+        }
     }
 }

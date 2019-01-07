@@ -24,6 +24,12 @@ public class BeerStyle
         return new BeerStyle(0,"",0,0);
     }
 
+    public static boolean isNone(BeerStyle beerStyle)
+    {
+        BeerStyle none = getNone();
+        return (beerStyle.getId() == none.getId() && beerStyle.getStyle().equals(none.getStyle()) && beerStyle.getMaximumTemperature() == none.getMaximumTemperature() && beerStyle.getMinimumTemperature() == none.getMinimumTemperature());
+    }
+
     /**
      * @return the id
      */

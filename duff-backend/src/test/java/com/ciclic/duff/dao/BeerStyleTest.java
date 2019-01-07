@@ -61,5 +61,20 @@ public class BeerStyleTest
 
 		assertTrue(beerStyles.size() >= 9);
 	}
+
+	@Test
+	public void getBeerStylesByName()
+	{
+		BeerStyleDAO beerStyleDAO = new BeerStyleDAO();
+
+		final String EXISTENT_BEER_STYLE = "Pilsens";
+		final String NON_EXISTENT_BEER_STYLE = "Beer Style that doesnt exists";
+
+		BeerStyle existent = beerStyleDAO.getBeerStyleByName(EXISTENT_BEER_STYLE);
+		BeerStyle nonExistent = beerStyleDAO.getBeerStyleByName(NON_EXISTENT_BEER_STYLE);
+
+		Assert.assertFalse(BeerStyle.isNone(existent));
+		Assert.assertTrue(BeerStyle.isNone(nonExistent));
+	}
 }
 

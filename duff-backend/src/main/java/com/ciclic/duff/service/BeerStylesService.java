@@ -54,4 +54,16 @@ public class BeerStylesService
             return "Beer style name not valid";
         }
     }
+
+    public static String updateBeerStyle(BeerStyleDTO beerStyleToUpdate)
+    {
+        BeerStyleDAO beerStyleDAO = new BeerStyleDAO();
+
+        BeerStyle beerStyle = beerStyleDAO.getBeerStyleByName(beerStyleToUpdate.getStyle());
+
+        if(BeerStyle.isNone(beerStyle)) return "Beer style not exists on database";
+        else if(beerStyleToUpdate.getMaximumTemperature() < beerStyleToUpdate.getMinimumTemperature()) return "Maximum temperature lesser than minimum temperature";
+
+        return beerStyleDAO.updateBeerStyle(beerStyleToUpdate);
+    }
 }
