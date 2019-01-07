@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                        https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>com.ciclic.duff</groupId>
+    <artifactId>duff-master</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+    
+    <modules>
+        <module>duff-database</module>
+        <module>duff-backend</module>
+    </modules>
+    <properties>
+        <main.basedir>${project.basedir}</main.basedir>
+        <maven.build.timestamp.format>yyyyMMddHHmmssSSS</maven.build.timestamp.format>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.timestamp>${maven.build.timestamp}</project.build.timestamp>
+
+        <!-- BACKEND LIBS VERSIONS -->
+        <versions.libs.spring.boot>1.5.7.RELEASE</versions.libs.spring.boot>
+
+        <!-- MAVEN/BUILD LIBS VERSIONS -->
+        <versions.plugins.flyway>4.2.0</versions.plugins.flyway>
+        <versions.plugins.maven.antrun>1.8</versions.plugins.maven.antrun>
+        <versions.plugins.maven.assembly>2.2-beta-5</versions.plugins.maven.assembly>
+        <versions.plugins.maven.compiler>3.6.1</versions.plugins.maven.compiler>
+        <versions.plugins.maven.resources>3.0.2</versions.plugins.maven.resources>
+        <versions.libs.oracle.jdbc>11.2.0</versions.libs.oracle.jdbc>
+        <versions.libs.spotify>2.1.2</versions.libs.spotify>
+
+        <!-- DATABASE -->
+        <settings.database.admin.user>SYS as SYSDBA</settings.database.admin.user>
+        <settings.database.admin.passwd>oracle</settings.database.admin.passwd>
+        <settings.database.url>jdbc:oracle:thin:@//127.0.0.1:1521/xe</settings.database.url>
+        <settings.database.duff.user>DUFF</settings.database.duff.user>
+        <settings.database.duff.passwd>DUFF</settings.database.duff.passwd>
+        <settings.database.duff.schema>DUFF_SCHEMA</settings.database.duff.schema>
+        <settings.flyway.out.of.order>false</settings.flyway.out.of.order>
+        <settings.flyway.skip.migrate>false</settings.flyway.skip.migrate>
+
+        <!-- SPOTIFY -->
+        <settings.spotify.client_id>fce3333441a04d919b904734630fac88</settings.spotify.client_id>
+        <settings.spotify.client_secret>96b9ba8aecf2403da31801e791138122</settings.spotify.client_secret>
+
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${versions.plugins.maven.resources}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${versions.plugins.maven.antrun}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${versions.plugins.maven.assembly}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${versions.plugins.maven.compiler}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <repositories>
+        <repository>
+            <id>project.local</id>
+            <name>project</name>
+            <url>file:${main.basedir}/repo</url>
+        </repository>
+    </repositories>
+</project>
